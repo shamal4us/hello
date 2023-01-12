@@ -46,9 +46,15 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 29, 230, 11),
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+          actions: [
+    Icon(Icons.favorite),
+    Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16),
+      child: Icon(Icons.search),
+    ),
+    Icon(Icons.more_vert),
+  ],
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
