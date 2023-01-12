@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: const MyHomePage(title: 'Seba Automation@'),
+      home: const MyHomePage(title: 'Seba Automation'),
     );
   }
 }
@@ -32,7 +33,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  int _sbox = 0;
   dynamic _clicked = '0 Times';
+  dynamic _boxItem = 'Box-1';
 
   void _incrementCounter() {
     setState(() {
@@ -41,39 +44,81 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _demoClick() {
+    setState(() {
+      _sbox++;
+      _boxItem = 'Box- $_sbox';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Container(
+          child: Row(
+            children: [
+              Image.asset(
+                "assets/images/logo.png",
+                fit: BoxFit.cover,
+              ),
+              Text('Hi, Andi Loshi')
+            ],
+          ),
+        ),
         backgroundColor: Color.fromARGB(255, 29, 230, 11),
-        title: Text(widget.title),
-          actions: [
-    Icon(Icons.favorite),
-    Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      child: Icon(Icons.search),
-    ),
-    Icon(Icons.more_vert),
-  ],
+        actions: [
+          IconButton(
+            icon: Icon(Icons.power_off, color: Colors.pinkAccent),
+            onPressed: () => _demoClick(),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Icon(Icons.search),
+          ),
+          Icon(Icons.more_vert),
+        ],
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Text('$_clicked')
-          ],
-        ),
-      ),
+          child: GridView.extent(
+        primary: false,
+        padding: const EdgeInsets.all(16),
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        maxCrossAxisExtent: 200.0,
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(8),
+            child: Text('$_boxItem', style: TextStyle(fontSize: 20)),
+            color: Colors.yellow,
+          ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            child: Text('$_counter', style: TextStyle(fontSize: 20)),
+            color: Colors.blue,
+          ),
+          Container(
+            child: Text('$_counter', style: TextStyle(fontSize: 20)),
+            padding: const EdgeInsets.all(8),
+            color: Colors.blue,
+          ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            child: Text('Birth Certificate', style: TextStyle(fontSize: 20)),
+            color: Colors.yellow,
+          ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            child: const Text('Fifth', style: TextStyle(fontSize: 20)),
+            color: Colors.yellow,
+          ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            child: const Text('Six', style: TextStyle(fontSize: 20)),
+            color: Colors.blue,
+          ),
+        ],
+      )),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
